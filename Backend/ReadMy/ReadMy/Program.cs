@@ -1,5 +1,9 @@
 using Application.Eventing.Command.Commands;
+using Infrastructure;
+using Infrastructure.DbSeed;
+using Infrastructure.Extensions;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;
 using System.Reflection;
@@ -15,13 +19,20 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog();
 
 // Add services to the container.
+
+builder.Services.ConfigureDataLayer(builder.Configuration);
+
 builder.Services.AddMediatR(typeof(FirstCommand).GetTypeInfo().Assembly);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
 var app = builder.Build();
+
+app = app.MigrateDatabase<ReadMyDbContext>();
+await app.SeedDatabaseAsync();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
