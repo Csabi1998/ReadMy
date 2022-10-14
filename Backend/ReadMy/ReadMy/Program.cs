@@ -1,4 +1,9 @@
 using Application.Eventing.Command.Commands;
+using Application.Extensions;
+
+using Common.Configuration;
+using Common.Options;
+
 using Infrastructure;
 using Infrastructure.DbSeed;
 using Infrastructure.Extensions;
@@ -21,8 +26,9 @@ builder.Host.UseSerilog();
 // Add services to the container.
 
 builder.Services.ConfigureDataLayer(builder.Configuration);
+builder.Services.ConfigureApplicationLayer(builder.Configuration);
+builder.Services.ConfigureAuthentication(builder.Configuration);
 
-builder.Services.AddMediatR(typeof(FirstCommand).GetTypeInfo().Assembly);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
