@@ -1,16 +1,13 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Text;
-
-using Common.Authorization;
+﻿using Common.Authorization;
 using Common.Options;
 using Common.Services;
-
 using IdentityModel;
-
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 
 namespace Common.Configuration
 {
@@ -22,6 +19,7 @@ namespace Common.Configuration
             services.AddScoped<IJwtTokenService, JwtTokenService>();
             services.Configure<AuthorizationOptions>(configuration.GetSection(nameof(AuthorizationOptions)));
             services.ConfigureCommonAuthentication(configuration);
+            services.ConfigurePolicy();
 
             return services;
         }
@@ -51,6 +49,28 @@ namespace Common.Configuration
                         ValidAudience = configuration["AuthorizationOptions:Audience"],
                     };
                 });
+
+            return services;
+        }
+
+        private static IServiceCollection ConfigurePolicy(this IServiceCollection services)
+        {
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(ReadMyRoles.Admin, policy => policy.RequireAuthenticatedUser()
+                .RequireClaim(JwtClaimTypes.Role, ReadMyRoles.Admin)
+                .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme));
+
+                options.AddPolicy(ReadMyRoles.ProjectManager, policy => policy.RequireAuthenticatedUser()
+                .RequireClaim(JwtClaimTypes.Role, ReadMyRoles.Admin, ReadMyRoles.ProjectManager)
+                .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme));
+
+                options.AddPolicy(ReadMyRoles.Worker, policy => policy.RequireAuthenticatedUser()
+                .RequireClaim(JwtClaimTypes.Role, ReadMyRoles.Admin, ReadMyRoles.ProjectManager, ReadMyRoles.Worker)
+                .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme));
+
+                options.DefaultPolicy = options.GetPolicy(ReadMyRoles.Worker);
+            });
 
             return services;
         }

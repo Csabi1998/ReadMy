@@ -2,6 +2,7 @@
 using Application.Eventing.Command.Response;
 
 using Common.Authorization;
+using Common.Exceptions;
 using Common.Services;
 
 using Domain.Entities;
@@ -24,8 +25,14 @@ namespace Application.Eventing.Command.CommandHandlers
         {
             var user = new ReadMyUser { UserName = request.Register.UserName, FullName = request.Register.FullName};
             var response = await userManager.CreateAsync(user, request.Register.Password);
-            if (!response.Succeeded) throw new ArgumentException(response.Errors.ToString());
-            await userManager.AddToRoleAsync(user, ReadMyRoles.Worker);
+
+            if (!response.Succeeded) 
+            {
+                var message = string.Join(" ;;;; ", response.Errors.Select(x => x.Description));
+                throw new BusinessException(message ?? "Ismeretlen hiba.");
+            } 
+                
+            await userManager.AddToRoleAsync(user, request.Register.Role);
             return new RegisterResponse();
         }
     }

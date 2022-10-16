@@ -2,5 +2,5 @@
 
 public static class ReadMyClaims
 {
-    public const string FullName = "Admin";
+    public const string FullName = "FullName";
 }

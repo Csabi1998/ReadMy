@@ -51,11 +51,11 @@ public class DbSeeder
         };
 
         admin.PasswordHash = passwordHasher.HashPassword(admin, "admin");
-        cece.PasswordHash = passwordHasher.HashPassword(admin, "cece");
-        csabi.PasswordHash = passwordHasher.HashPassword(admin, "csabi");
-        bela.PasswordHash = passwordHasher.HashPassword(admin, "bela");
-        karoly.PasswordHash = passwordHasher.HashPassword(admin, "karoly");
-        andras.PasswordHash = passwordHasher.HashPassword(admin, "andras");
+        cece.PasswordHash = passwordHasher.HashPassword(cece, "cece");
+        csabi.PasswordHash = passwordHasher.HashPassword(csabi, "csabi");
+        bela.PasswordHash = passwordHasher.HashPassword(bela, "bela");
+        karoly.PasswordHash = passwordHasher.HashPassword(karoly, "karoly");
+        andras.PasswordHash = passwordHasher.HashPassword(andras, "andras");
 
         await context.AddRangeAsync(users);
         await context.SaveChangesAsync();

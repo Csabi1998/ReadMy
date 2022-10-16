@@ -1,6 +1,9 @@
 using Application.Eventing.Command.Commands;
+using Application.Eventing.Command.Dtos;
 using Application.Eventing.Command.Response;
+using Common.Authorization;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ReadMy.Controllers
@@ -36,9 +39,17 @@ namespace ReadMy.Controllers
         }
 
         [HttpGet("command")]
+        [Authorize(Policy = ReadMyRoles.ProjectManager)]
         public async Task<ActionResult<FirstResponse>> GetCommandResponse()
         {
             var result = await mediator.Send(new FirstCommand(), HttpContext.RequestAborted);
+            return result;
+        }
+
+        [HttpPost("login")]
+        public async Task<ActionResult<LoginResponse>> Login([FromBody] LoginDto dto)
+        {
+            var result = await mediator.Send(new LoginCommand(dto), HttpContext.RequestAborted);
             return result;
         }
     }
