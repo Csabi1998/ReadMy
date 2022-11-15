@@ -26,7 +26,7 @@ namespace Application.Eventing.Command.CommandHandlers
 
             if (taskunit is null)
             {
-                throw new BusinessException(TaszunitMessages.TaskunitNotFound);
+                throw new BusinessException(TaskunitMessages.TaskunitNotFound);
             }
 
             taskunit.Modify(request.Dto.Name, request.Dto.Description, request.Dto.Type);
