@@ -22,7 +22,7 @@ namespace ReadMy.Controllers
         }
 
         [HttpPost("register")]
-        [Authorize(Policy = ReadMyRoles.Admin)]
+        [Authorize(ReadMyRoles.Admin)]
         public async Task<ActionResult<RegisterResponse>> Regiszter([FromBody] RegisterDto request)
         {
             return await mediator.Send(new RegisterCommand(request), HttpContext.RequestAborted);

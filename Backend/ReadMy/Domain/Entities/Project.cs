@@ -4,14 +4,15 @@ namespace Domain.Entities;
 
 public class Project
 {
-    public Project(string id,
-                   string name,
-                   string description,
-                   DateTime creationDate,
-                   string creatorId,
-                   ReadMyUser creator,
-                   List<ReadMyUser> participants,
-                   List<Taskunit> tasks)
+    public Project(
+        string id,
+        string name,
+        string description,
+        DateTime creationDate,
+        string creatorId,
+        ReadMyUser creator,
+        List<ReadMyUser> participants,
+        List<Taskunit> tasks)
     {
         Id = id;
         Name = name;
@@ -23,9 +24,10 @@ public class Project
         CreationDate = creationDate;
     }
 
-    public Project(string name,
-                   string description,
-                   string creatorId) : base()
+    public Project(
+        string name,
+        string description,
+        string creatorId) : base()
     {
         Name = name;
         Description = description;
@@ -39,12 +41,18 @@ public class Project
     }
 
     public string Id { get; }
-    public string Name { get; }
-    public string Description { get; }
+    public string Name { get; private set; }
+    public string Description { get; private set; }
     public DateTime CreationDate { get; }
     public string? CreatorId { get; }
     public ReadMyUser? Creator { get; }
     public List<ReadMyUser>? Participants { get; } = new List<ReadMyUser>();
     public List<Taskunit>? Tasks { get; } = new List<Taskunit>();
+
+    public void Modify(string name, string description) 
+    {
+        Name = name;
+        Description = description;
+    }
 
 }

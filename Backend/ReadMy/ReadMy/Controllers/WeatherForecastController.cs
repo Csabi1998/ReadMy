@@ -39,7 +39,7 @@ namespace ReadMy.Controllers
         }
 
         [HttpGet("command")]
-        [Authorize(Policy = ReadMyRoles.ProjectManager)]
+        [Authorize(ReadMyRoles.ProjectManager)]
         public async Task<ActionResult<FirstResponse>> GetCommandResponse()
         {
             var result = await mediator.Send(new FirstCommand(), HttpContext.RequestAborted);
