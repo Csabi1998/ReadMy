@@ -4,12 +4,14 @@ using Application.Eventing.Command.Response;
 
 using MediatR;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ReadMy.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class LogsController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -20,13 +22,13 @@ namespace ReadMy.Controllers
         }
 
         [HttpPost]
-        public async Task<CreateLogResponse> CreateTaskunitAsync([FromBody] CreateLogDto dto, CancellationToken cancellationToken)
+        public async Task<ActionResult<CreateLogResponse>> CreateTaskunitAsync([FromBody] CreateLogDto dto, CancellationToken cancellationToken)
         {
             return await _mediator.Send(new CreateLogCommand(dto), cancellationToken);
         }
 
         [HttpPut]
-        public async Task<UpdateLogResponse> UpdataTaskunitAsync([FromBody] UpdateLogDto dto, CancellationToken cancellationToken)
+        public async Task<ActionResult<UpdateLogResponse>> UpdataTaskunitAsync([FromBody] UpdateLogDto dto, CancellationToken cancellationToken)
         {
             return await _mediator.Send(new UpdateLogCommand(dto), cancellationToken);
         }

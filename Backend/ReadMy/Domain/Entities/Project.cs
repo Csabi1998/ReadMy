@@ -27,7 +27,7 @@ public class Project
     public Project(
         string name,
         string description,
-        string creatorId) : base()
+        string creatorId) : this()
     {
         Name = name;
         Description = description;
@@ -46,8 +46,8 @@ public class Project
     public DateTime CreationDate { get; }
     public string? CreatorId { get; }
     public ReadMyUser? Creator { get; }
-    public List<ReadMyUser>? Participants { get; } = new List<ReadMyUser>();
-    public List<Taskunit>? Tasks { get; } = new List<Taskunit>();
+    public List<ReadMyUser> Participants { get; } = new List<ReadMyUser>();
+    public List<Taskunit> Tasks { get; } = new List<Taskunit>();
 
     public void Modify(string name, string description) 
     {

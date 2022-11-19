@@ -29,7 +29,7 @@ public class Taskunit
         string name,
         string description,
         string type,
-        string projectId) : base()
+        string projectId) : this()
     {
         SerialNumber = serialNumber;
         Name = name;

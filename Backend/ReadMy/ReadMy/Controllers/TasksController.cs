@@ -4,12 +4,14 @@ using Application.Eventing.Command.Response;
 
 using MediatR;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ReadMy.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class TasksController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -20,13 +22,13 @@ namespace ReadMy.Controllers
         }
 
         [HttpPost]
-        public async Task<CreateTaskunitResponse> CreateTaskunitAsync([FromBody] CreateTaskunitDto dto, CancellationToken cancellationToken)
+        public async Task<ActionResult<CreateTaskunitResponse>> CreateTaskunitAsync([FromBody] CreateTaskunitDto dto, CancellationToken cancellationToken)
         {
             return await _mediator.Send(new CreateTaskunitCommand(dto), cancellationToken);
         }
 
         [HttpPut]
-        public async Task<UpdateTaskunitResponse> UpdataTaskunitAsync([FromBody] UpdateTaskunitDto dto, CancellationToken cancellationToken)
+        public async Task<ActionResult<UpdateTaskunitResponse>> UpdataTaskunitAsync([FromBody] UpdateTaskunitDto dto, CancellationToken cancellationToken)
         {
             return await _mediator.Send(new UpdateTaskunitCommand(dto), cancellationToken);
         }

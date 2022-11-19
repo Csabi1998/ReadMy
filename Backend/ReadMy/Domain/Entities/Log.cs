@@ -32,7 +32,7 @@ public class Log
         string description,
         string type,
         string creatorId,
-        string taskId) : base()
+        string taskId) : this()
     {
         WorkingHours = workingHours;
         Name = name;

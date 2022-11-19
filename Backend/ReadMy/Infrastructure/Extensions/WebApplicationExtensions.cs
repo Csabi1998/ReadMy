@@ -15,6 +15,7 @@ public static class WebApplicationExtensions
         {
             var serviceProvider = scope.ServiceProvider;
             var context = serviceProvider.GetRequiredService<TContext>();
+            context.Database.Migrate();
         }
 
         return app;

@@ -1,6 +1,9 @@
 ﻿using Application.Eventing.Command.Commands;
 using Application.Eventing.Command.Dtos;
 using Application.Eventing.Command.Response;
+using Application.Eventing.Query.Querys;
+using Application.Eventing.Query.ViewModels;
+
 using Common.Authorization;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -21,17 +24,24 @@ namespace ReadMy.Controllers
             this.mediator = mediator;
         }
 
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult<UsersListViewModel>> GetUsersAsync(CancellationToken cancellationToken)
+        {
+            return await mediator.Send(new GetUsersQuery(), cancellationToken);
+        }
+
         [HttpPost("register")]
         [Authorize(ReadMyRoles.Admin)]
-        public async Task<ActionResult<RegisterResponse>> Regiszter([FromBody] RegisterDto request)
+        public async Task<ActionResult<RegisterResponse>> RegiszterAsync([FromBody] RegisterDto request, CancellationToken cancellationToken)
         {
-            return await mediator.Send(new RegisterCommand(request), HttpContext.RequestAborted);
+            return await mediator.Send(new RegisterCommand(request), cancellationToken);
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<LoginResponse>> Login([FromBody] LoginDto request)
+        public async Task<ActionResult<LoginResponse>> LoginAsync([FromBody] LoginDto request, CancellationToken cancellationToken)
         {
-            return await mediator.Send(new LoginCommand(request), HttpContext.RequestAborted);
+            return await mediator.Send(new LoginCommand(request), cancellationToken);
         }
     }
 }
