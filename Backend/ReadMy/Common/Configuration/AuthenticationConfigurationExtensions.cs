@@ -1,4 +1,5 @@
 ﻿using Common.Authorization;
+using Common.Interfaces;
 using Common.Options;
 using Common.Services;
 using IdentityModel;
@@ -17,6 +18,7 @@ namespace Common.Configuration
         {
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddScoped<IJwtTokenService, JwtTokenService>();
+            services.AddScoped<IExcelService, ExcelService>();
             services.Configure<AuthorizationOptions>(configuration.GetSection(nameof(AuthorizationOptions)));
             services.ConfigureCommonAuthentication(configuration);
             services.ConfigurePolicy();

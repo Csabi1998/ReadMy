@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Text;
 
 using Common.Authorization;
+using Common.Interfaces;
 using Common.Options;
 
 using IdentityModel;
@@ -11,13 +12,6 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Common.Services;
-
-public interface IJwtTokenService
-{
-    string CreateToken(string userId, string userName, string name, string role);
-
-    string CreateToken(IEnumerable<Claim> claims);
-}
 
 public class JwtTokenService : IJwtTokenService
 {

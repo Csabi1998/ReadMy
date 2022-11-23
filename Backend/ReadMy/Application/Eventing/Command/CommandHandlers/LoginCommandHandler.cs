@@ -3,6 +3,7 @@ using Application.Eventing.Command.Commands;
 using Application.Eventing.Command.Response;
 using Common.Authorization;
 using Common.Exceptions;
+using Common.Interfaces;
 using Common.Services;
 using Domain.Entities;
 using MediatR;

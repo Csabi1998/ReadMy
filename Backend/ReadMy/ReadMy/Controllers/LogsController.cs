@@ -1,6 +1,8 @@
-﻿using Application.Eventing.Command.Commands;
+﻿using Application.Constants;
+using Application.Eventing.Command.Commands;
 using Application.Eventing.Command.Dtos;
 using Application.Eventing.Command.Response;
+using Application.Eventing.Query.Querys;
 
 using MediatR;
 
@@ -19,6 +21,14 @@ namespace ReadMy.Controllers
         public LogsController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpGet("export")]
+        public async Task<ActionResult> LogsExcelExportAsync(CancellationToken cancellationToken) 
+        {
+            var excelResult = await _mediator.Send(new LogsExcelExportQuery(), cancellationToken);
+
+            return File(excelResult.Bytes, ContentTypes.XLSX, excelResult.Name);
         }
 
         [HttpPost]
