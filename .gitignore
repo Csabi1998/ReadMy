@@ -348,3 +348,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+Backend/ReadMy/ReadMy/Scripts/initNoDbReset.bat
+Backend/ReadMy/ReadMy/Scripts/initWithDbReset.bat
