@@ -5,6 +5,6 @@ timeout /t 10
 docker exec -it SqlServer /opt/mssql-tools/bin/sqlcmd -S localhost,1436 -U sa -P "MyPass@word" -Q "CREATE DATABASE [ReadMyDadabase]"
 
 
-set ReadMyService=E:\2MSC\Archi\ReadMy\Backend\ReadMy\ReadMy
+set ReadMyService=C:\Users\Levi\Documents\GitHub\ReadMy\Backend\ReadMy\ReadMy
 
 start cmd /K "dotnet run --project %ReadMyService%"
