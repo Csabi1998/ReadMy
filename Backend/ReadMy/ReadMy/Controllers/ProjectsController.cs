@@ -1,7 +1,8 @@
 ﻿using Application.Eventing.Command.Commands;
 using Application.Eventing.Command.Dtos;
 using Application.Eventing.Command.Response;
-
+using Application.Eventing.Query.Querys;
+using Application.Eventing.Query.ViewModels;
 using MediatR;
 
 using Microsoft.AspNetCore.Authorization;
@@ -19,6 +20,12 @@ namespace ReadMy.Controllers
         public ProjectsController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<ProjectsListViewModel>> GetProjects(CancellationToken cancellationToken)
+        {
+            return await _mediator.Send(new GetProjectsQuery(), cancellationToken);
         }
 
         [HttpPost]
