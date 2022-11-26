@@ -75,7 +75,8 @@
               "browserTarget": "read-my:build:production"
             },
             "development": {
-              "browserTarget": "read-my:build:development"
+              "browserTarget": "read-my:build:development",
+              "proxyConfig": "src/proxy.conf.js"
             }
           },
           "defaultConfiguration": "development"
