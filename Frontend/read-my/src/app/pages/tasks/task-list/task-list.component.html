@@ -1,0 +1,29 @@
+<div class="mt-5">
+  <div class="d-flex justify-content-between mb-3">
+    <h3>Tasks</h3>
+    <div class="d-flex gap-2 justify-content-between">
+      <a class="btn btn-danger text-truncate"
+        ><app-arrow-down-icon></app-arrow-down-icon> Name</a
+      >
+      <a class="btn btn-danger text-truncate"
+        ><app-arrow-up-icon></app-arrow-up-icon> Hours</a
+      >
+      <a class="btn btn-danger text-truncate">Add New Task</a>
+    </div>
+  </div>
+  <div class="list-group">
+    <a
+      href="#"
+      class="list-group-item list-group-item-action py-3 d-flex align-content-center justify-content-between align-content-end"
+      *ngFor="let task of tasks"
+      ><div class="">
+        <h5 class="mb-2">{{ task.name }}</h5>
+        <p class="m-0 fw-lighter fst-italic">{{ task.type }}</p>
+      </div>
+
+      <span class="m-0 p-0 text-black-50">
+        {{ task.totalHours }} hours total
+      </span>
+    </a>
+  </div>
+</div>
