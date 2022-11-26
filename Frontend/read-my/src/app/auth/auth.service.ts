@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, take } from 'rxjs';
+import { Router } from '@angular/router';
+import { BehaviorSubject, map, Observable, take, tap } from 'rxjs';
 import { LoginResponse } from '../api/users/models/loginResponse';
 import { UserData } from '../api/users/models/userData';
 import { UserService } from './../api/users/user.service';
@@ -13,21 +14,20 @@ export class AuthService {
 
   constructor(
     private tokenService: TokenService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
 
-  public login(username: string, password: string) {
-    this.userService
+  public login(username: string, password: string): Observable<any> {
+    return this.userService
       .login({ userName: username, password: password })
-      .subscribe({
-        next: this.handleAuth,
-        error: (e) => console.error(e),
-      });
+      .pipe(tap(this.handleAuth));
   }
 
   public logout() {
     this.user.next(null);
     this.tokenService.removeToken();
+    this.router.navigate(['/auth']);
   }
 
   private handleAuth(res: LoginResponse) {
