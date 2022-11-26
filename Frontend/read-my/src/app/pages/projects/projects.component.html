@@ -1,0 +1,8 @@
+<div class="row mt-4">
+  <div class="col-md-6 my-3" *ngFor="let proj of projects">
+    <app-project-card
+      [project]="proj"
+      [shouldShowEditAndDeleteButton]="true"
+    ></app-project-card>
+  </div>
+</div>
