@@ -11,10 +11,10 @@
  */
 
 export interface ProjectResponse {
-  id?: string;
-  name?: string;
-  description?: string;
-  creator?: string;
-  creationDate?: Date;
-  praticipants?: Array<string>;
+  id: string;
+  name: string;
+  description: string;
+  creator: string;
+  creationDate: Date;
+  praticipants: Array<string>;
 }
