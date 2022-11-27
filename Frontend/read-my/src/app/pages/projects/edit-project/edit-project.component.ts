@@ -1,8 +1,9 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ProjectResponse } from 'src/app/api/projects/models/projectResponse';
 import { ProjectDataService } from './../../../api/projects/project-data.service';
 
 @Component({
@@ -10,23 +11,46 @@ import { ProjectDataService } from './../../../api/projects/project-data.service
   templateUrl: './edit-project.component.html',
   styleUrls: ['./edit-project.component.css'],
 })
-export class EditProjectComponent implements OnInit {
+export class EditProjectComponent implements OnInit, AfterViewInit {
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private location: Location,
     private projectDataService: ProjectDataService,
     private toastr: ToastrService
   ) {}
+
+  @ViewChild('projectForm', { static: false }) projectForm!: NgForm;
+
   isLoading = false;
   projectId?: string;
+  projectUnderEdit?: ProjectResponse;
 
-  participants = ['Participant 1', 'Participant 2'];
+  ngAfterViewInit(): void {
+    if (!this.isNew) {
+      setTimeout(() => {
+        this.projectForm.setValue({
+          projectName: this.projectUnderEdit!.name,
+          description: this.projectUnderEdit!.description,
+        });
+      }, 1);
+    }
+  }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.projectId = params['id'];
     });
+    if (!this.isNew) {
+      this.projectUnderEdit = this.projectDataService.getProjectById(
+        this.projectId!
+      );
+      if (this.projectUnderEdit === undefined) {
+        this.toastr.error('Project not found');
+        this.location.back();
+      }
+
+      console.log(this.projectUnderEdit);
+    }
   }
 
   get isNew() {
@@ -62,6 +86,24 @@ export class EditProjectComponent implements OnInit {
         },
       });
     } else {
+      const updateProjObs = this.projectDataService.updateProject(
+        name,
+        description,
+        this.projectId!
+      );
+
+      updateProjObs.subscribe({
+        next: (resData) => {
+          this.isLoading = false;
+          this.toastr.success('Project updated!');
+          this.back();
+        },
+        error: (errorMessage) => {
+          console.log(errorMessage);
+          this.toastr.error(errorMessage);
+          this.isLoading = false;
+        },
+      });
     }
 
     form.reset();
