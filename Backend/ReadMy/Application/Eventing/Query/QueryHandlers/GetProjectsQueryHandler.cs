@@ -25,7 +25,7 @@ namespace Application.Eventing.Query.QueryHandlers
         {
             var projects = await _context.Projects
                 .Where(x => _userService.User.Role == ReadMyRoles.Admin || (x.Participants.Any(p => p.Id == _userService.User.UserId) || x.Creator.Id == _userService.User.UserId))
-                .Select(x => new ProjectViewModel(x.Id, x.Name, x.Description, x.Creator.FullName, x.CreationDate, x.Participants.Select(x => x.FullName).ToList()))
+                .Select(x => new ProjectViewModel(x.Id, x.Name, x.Description, new ProjectParticipantViewModel(x.Creator.Id, x.Creator.FullName), x.CreationDate, x.Participants.Select(x => new ProjectParticipantViewModel(x.Id, x.FullName)).ToList()))
                 .ToListAsync(cancellationToken);
 
             return new ProjectsListViewModel(projects);
