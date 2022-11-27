@@ -89,7 +89,7 @@ namespace Common.Configuration
             {
                 options.AddPolicy("CorsPolicy", builder =>
                 {
-                    builder.WithOrigins(configuration.GetSection("AllowedHosts").Get<string[]>())
+                    builder.WithOrigins(configuration.GetSection("AllowedOrigins").Get<string[]>())
                            .AllowAnyMethod()
                            .AllowAnyHeader()
                            .AllowCredentials();
