@@ -14,7 +14,7 @@ export class ProjectsComponent {
       description: 'Description 1',
       creator: 'Creator 1',
       creationDate: new Date(),
-      praticipants: ['Participant 1', 'Participant 2'],
+      participants: ['Participant 1', 'Participant 2'],
     },
     {
       id: '2',
@@ -22,7 +22,7 @@ export class ProjectsComponent {
       description: 'Description 2',
       creator: 'Creator 2',
       creationDate: new Date(),
-      praticipants: ['Participant 1', 'Participant 2'],
+      participants: ['Participant 1', 'Participant 2'],
     },
     {
       id: '3',
@@ -30,7 +30,7 @@ export class ProjectsComponent {
       description: 'Description 2',
       creator: 'Creator 2',
       creationDate: new Date(),
-      praticipants: ['Participant 1', 'Participant 2'],
+      participants: ['Participant 1', 'Participant 2'],
     },
     {
       id: '4',
@@ -38,7 +38,7 @@ export class ProjectsComponent {
       description: 'Description 2',
       creator: 'Creator 2',
       creationDate: new Date(),
-      praticipants: ['Participant 1', 'Participant 2'],
+      participants: ['Participant 1', 'Participant 2'],
     },
   ];
 }
