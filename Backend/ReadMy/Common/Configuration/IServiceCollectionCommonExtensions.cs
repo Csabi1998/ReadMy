@@ -21,6 +21,7 @@ namespace Common.Configuration
             services.Configure<AuthorizationOptions>(configuration.GetSection(nameof(AuthorizationOptions)));
             services.ConfigureCommonAuthentication(configuration);
             services.ConfigurePolicy();
+            services.ConfigureCors(configuration);
 
             return services;
         }
