@@ -23,9 +23,12 @@
       <div class="flex-column d-flex align-items-end">
         <p class="mb-2 p-0 text-black-50">{{ task.totalHours }} hours total</p>
         <div class="btn-group">
-          <button class="btn btn-xs btn-outline-info">
+          <a
+            class="btn btn-xs btn-outline-info"
+            routerLink="tasks/{{ task.id }}/edit"
+          >
             <app-edit-icon></app-edit-icon>
-          </button>
+          </a>
           <button class="btn btn-xs btn-outline-danger">
             <app-delete-icon></app-delete-icon>
           </button>

@@ -13,21 +13,24 @@
     {{ task.description }}
   </p>
   <div class="d-flex justify-content-between">
-    <button class="btn btn-secondary col-2 text-truncate" (click)="back()">
+    <button
+      class="btn btn-secondary col-2 col-md-1 text-truncate"
+      (click)="back()"
+    >
       Back
     </button>
 
     <div class="d-flex gap-2 justify-content-end col-8">
       <button
         *ngIf="shouldShowEditAndDeleteButton"
-        class="btn btn-danger col-3 text-truncate"
+        class="btn btn-danger col-3 col-md-2 text-truncate"
       >
         Delete
       </button>
       <a
         *ngIf="shouldShowEditAndDeleteButton"
         routerLink="edit"
-        class="btn btn-info col-3 text-truncate"
+        class="btn btn-info col-3 col-md-2 text-truncate"
         >Edit</a
       >
     </div>

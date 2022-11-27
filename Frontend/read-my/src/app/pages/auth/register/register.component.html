@@ -4,7 +4,7 @@
   <div *ngIf="isLoading" style="text-align: center">
     <app-loader></app-loader>
   </div>
-  <div class="col-xs-12 col-md-6 bg-light p-4 card" *ngIf="!isLoading">
+  <div class="col-xs-12 col-md-8 bg-light p-4 card" *ngIf="!isLoading">
     <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
       <h3>Register Colleague</h3>
       <div class="form-group">
@@ -18,8 +18,10 @@
           required
         />
       </div>
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap">
-        <div class="form-group col-md-7 col-12">
+      <div
+        class="d-flex gap-2 justify-content-between flex-wrap flex-md-nowrap"
+      >
+        <div class="form-group col-md-8 col-12">
           <label for="username" class="mb-1 mt-2">Username</label>
           <input
             type="text"
@@ -31,15 +33,16 @@
             minlength="4"
           />
         </div>
-        <div class="form-group col-md-4 col-12">
+        <div class="form-group flex-grow-1">
           <label for="roleSelector" class="mb-1 mt-2">Role</label>
           <select
             ngModel
             name="roleSelector"
             class="form-select"
             id="roleSelector"
+            required
           >
-            <option selected="selected" value="Worker">Colleague</option>
+            <option value="Worker">Colleague</option>
             <option value="Project manager">PM</option>
             <option value="Admin">Admin</option>
           </select>
@@ -68,7 +71,7 @@
       </p>
       <div class="d-flex justify-content-end">
         <button
-          class="btn btn-primary mt-3"
+          class="btn btn-primary mt-3 col-4 col-lg-3"
           type="submit"
           [disabled]="!registerForm.valid"
         >

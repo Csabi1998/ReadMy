@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, map, Observable, take, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { LoginResponse } from '../api/users/models/loginResponse';
 import { UserData } from '../api/users/models/userData';
 import { UserService } from './../api/users/user.service';
@@ -31,7 +31,6 @@ export class AuthService {
   }
 
   private handleAuth = (res: LoginResponse) => {
-    console.log(this.tokenService);
     this.tokenService.token = res.token || null;
     this.user.next(this.tokenService.userData);
   };
@@ -43,29 +42,17 @@ export class AuthService {
   }
 
   public get isLoggedIn() {
-    return this.user.pipe(
-      take(1),
-      map((user) => user !== null)
-    );
+    return this.user.value !== null;
   }
 
   public get isAdmin() {
-    return this.user.pipe(
-      take(1),
-      map((user) => user?.isAdmin ?? false)
-    );
+    return this.user.value?.isAdmin;
   }
 
   public get isWorker() {
-    return this.user.pipe(
-      take(1),
-      map((user) => user?.isWorker ?? false)
-    );
+    return this.user.value?.isWorker ?? false;
   }
   public get isPM() {
-    return this.user.pipe(
-      take(1),
-      map((user) => user?.isPM ?? false)
-    );
+    return this.user.value?.isPM ?? false;
   }
 }
