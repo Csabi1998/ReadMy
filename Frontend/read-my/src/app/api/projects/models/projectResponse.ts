@@ -16,5 +16,5 @@ export interface ProjectResponse {
   description: string;
   creator: string;
   creationDate: Date;
-  praticipants: Array<string>;
+  participants: Array<string>;
 }

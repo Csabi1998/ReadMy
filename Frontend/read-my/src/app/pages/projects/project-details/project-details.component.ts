@@ -13,7 +13,7 @@ export class ProjectDetailsComponent {
       description: 'Description 1',
       creator: 'Creator 1',
       creationDate: new Date(),
-      praticipants: ['Participant 1', 'Participant 2'],
+      participants: ['Participant 1', 'Participant 2'],
     },
     tasks: [
       {

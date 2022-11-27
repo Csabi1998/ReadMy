@@ -8,6 +8,7 @@ import { AppConstants } from './../common/app-constants';
 })
 export class TokenService {
   public set token(value: string | null) {
+    console.log(value);
     if (value) localStorage.setItem(AppConstants.TOKEN_KEY, value);
   }
 

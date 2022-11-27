@@ -12,17 +12,19 @@ import { AppComponent } from './app.component';
 import { LoaderComponent } from './common/components/loader/loader.component';
 import { NavbarComponent } from './common/components/navbar/navbar.component';
 import { AuthComponent } from './pages/auth/auth.component';
-import { ProjectsComponent } from './pages/projects/projects.component';
-import { ProjectCardComponent } from './pages/projects/project-card/project-card.component';
-import { ProjectDetailsComponent } from './pages/projects/project-details/project-details.component';
-import { TaskListComponent } from './pages/tasks/task-list/task-list.component';
-import { ArrowUpIconComponent } from './pages/tasks/task-list/arrow-up-icon/arrow-up-icon.component';
-import { ArrowDownIconComponent } from './pages/tasks/task-list/arrow-down-icon/arrow-down-icon.component';
-import { EditTaskComponent } from './pages/tasks/edit-task/edit-task.component';
-import { EditProjectComponent } from './pages/projects/edit-project/edit-project.component';
+import { EditLogItemComponent } from './pages/logs/edit-log-item/edit-log-item.component';
 import { LogItemComponent } from './pages/logs/log-item/log-item.component';
 import { LogListComponent } from './pages/logs/log-list/log-list.component';
-import { EditLogItemComponent } from './pages/logs/edit-log-item/edit-log-item.component';
+import { EditProjectComponent } from './pages/projects/edit-project/edit-project.component';
+import { ProjectCardComponent } from './pages/projects/project-card/project-card.component';
+import { ProjectDetailsComponent } from './pages/projects/project-details/project-details.component';
+import { ProjectsComponent } from './pages/projects/projects.component';
+import { EditTaskComponent } from './pages/tasks/edit-task/edit-task.component';
+import { ArrowDownIconComponent } from './pages/tasks/task-list/arrow-down-icon/arrow-down-icon.component';
+import { ArrowUpIconComponent } from './pages/tasks/task-list/arrow-up-icon/arrow-up-icon.component';
+import { TaskListComponent } from './pages/tasks/task-list/task-list.component';
+import { RegisterComponent } from './pages/auth/register/register.component';
+import { DropdownDirective } from './common/directives/dropdown.directive';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { EditLogItemComponent } from './pages/logs/edit-log-item/edit-log-item.c
     LogItemComponent,
     LogListComponent,
     EditLogItemComponent,
+    RegisterComponent,
+    DropdownDirective,
   ],
   imports: [
     BrowserModule,
