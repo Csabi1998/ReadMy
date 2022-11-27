@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ProjectResolverService } from './api/projects/project-resolver.service';
 import { AdminGuard } from './auth/admin.guard';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthComponent } from './pages/auth/auth.component';
@@ -23,7 +24,11 @@ const routes: Routes = [
         canActivate: [AdminGuard],
         component: RegisterComponent,
       },
-      { path: 'projects', component: ProjectsComponent },
+      {
+        path: 'projects',
+        resolve: [ProjectResolverService],
+        component: ProjectsComponent,
+      },
       { path: 'projects/new', component: EditProjectComponent },
       { path: 'projects/:id', component: ProjectDetailsComponent },
       { path: 'projects/:id/tasks/new', component: EditTaskComponent },
