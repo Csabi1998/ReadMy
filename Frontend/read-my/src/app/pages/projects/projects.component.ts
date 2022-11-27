@@ -1,44 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ProjectResponse } from 'src/app/api/projects/models/projectResponse';
+import { ProjectDataService } from 'src/app/api/projects/project-data.service';
 
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.css'],
 })
-export class ProjectsComponent {
-  public projects: Array<ProjectResponse> = [
-    {
-      id: '1',
-      name: 'Project 1',
-      description: 'Description 1',
-      creator: 'Creator 1',
-      creationDate: new Date(),
-      participants: ['Participant 1', 'Participant 2'],
-    },
-    {
-      id: '2',
-      name: 'Project 2',
-      description: 'Description 2',
-      creator: 'Creator 2',
-      creationDate: new Date(),
-      participants: ['Participant 1', 'Participant 2'],
-    },
-    {
-      id: '3',
-      name: 'Project 2',
-      description: 'Description 2',
-      creator: 'Creator 2',
-      creationDate: new Date(),
-      participants: ['Participant 1', 'Participant 2'],
-    },
-    {
-      id: '4',
-      name: 'Project 2',
-      description: 'Description 2',
-      creator: 'Creator 2',
-      creationDate: new Date(),
-      participants: ['Participant 1', 'Participant 2'],
-    },
-  ];
+export class ProjectsComponent implements OnInit, OnDestroy {
+  projects: ProjectResponse[] = [];
+  subscription!: Subscription;
+
+  constructor(private projectDataService: ProjectDataService) {}
+
+  ngOnInit() {
+    this.subscription = this.projectDataService.projects.subscribe(
+      (projects: ProjectResponse[]) => {
+        this.projects = projects.slice();
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }
