@@ -24,9 +24,15 @@ namespace ReadMy.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<ProjectsListViewModel>> GetProjects(CancellationToken cancellationToken)
+        public async Task<ActionResult<ProjectsListViewModel>> GetProjectsAsync(CancellationToken cancellationToken)
         {
             return await _mediator.Send(new GetProjectsQuery(), cancellationToken);
+        }
+        
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ProjectViewModel>> GetProjectAsync([FromRoute] string id, CancellationToken cancellationToken)
+        {
+            return await _mediator.Send(new GetProjectQuery(id), cancellationToken);
         }
 
         [HttpPost]

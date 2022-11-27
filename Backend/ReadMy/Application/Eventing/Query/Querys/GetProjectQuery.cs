@@ -1,0 +1,16 @@
+﻿using Application.Eventing.Query.ViewModels;
+
+using MediatR;
+
+namespace Application.Eventing.Query.Querys
+{
+    public class GetProjectQuery : IRequest<ProjectViewModel>
+    {
+        public GetProjectQuery(string id)
+        {
+            Id = id;
+        }
+
+        public string Id { get; }
+    }
+}
