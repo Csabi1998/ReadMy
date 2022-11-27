@@ -11,6 +11,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoaderComponent } from './common/components/loader/loader.component';
 import { NavbarComponent } from './common/components/navbar/navbar.component';
+import { ArrowDownIconComponent } from './common/icons/arrow-down-icon/arrow-down-icon.component';
+import { ArrowUpIconComponent } from './common/icons/arrow-up-icon/arrow-up-icon.component';
+import { DeleteIconComponent } from './common/icons/delete-icon/delete-icon.component';
+import { EditIconComponent } from './common/icons/edit-icon/edit-icon.component';
 import { AuthComponent } from './pages/auth/auth.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
 import { EditLogItemComponent } from './pages/logs/edit-log-item/edit-log-item.component';
@@ -21,9 +25,9 @@ import { ProjectCardComponent } from './pages/projects/project-card/project-card
 import { ProjectDetailsComponent } from './pages/projects/project-details/project-details.component';
 import { ProjectsComponent } from './pages/projects/projects.component';
 import { EditTaskComponent } from './pages/tasks/edit-task/edit-task.component';
-import { ArrowDownIconComponent } from './pages/tasks/task-list/arrow-down-icon/arrow-down-icon.component';
-import { ArrowUpIconComponent } from './pages/tasks/task-list/arrow-up-icon/arrow-up-icon.component';
+import { TaskDetailsComponent } from './pages/tasks/task-details/task-details.component';
 import { TaskListComponent } from './pages/tasks/task-list/task-list.component';
+import { TaskDetailsCardComponent } from './pages/tasks/task-details-card/task-details-card.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +47,10 @@ import { TaskListComponent } from './pages/tasks/task-list/task-list.component';
     LogListComponent,
     EditLogItemComponent,
     RegisterComponent,
+    TaskDetailsComponent,
+    EditIconComponent,
+    DeleteIconComponent,
+    TaskDetailsCardComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,35 @@
+<div class="card card-body">
+  <div class="d-flex justify-content-between">
+    <div class="mb-3">
+      <h5 class="card-title">#{{ task.serialNumber }} - {{ task.name }}</h5>
+      <p class="m-0 fw-lighter fst-italic">
+        {{ task.type }} - {{ task.sumOfLogs }} hours total
+      </p>
+    </div>
+    <p class="fw-semibold text-black-50">{{ task.creationDate | date }}</p>
+  </div>
+
+  <p class="card-text">
+    {{ task.description }}
+  </p>
+  <div class="d-flex justify-content-between">
+    <button class="btn btn-secondary col-2 text-truncate" (click)="back()">
+      Back
+    </button>
+
+    <div class="d-flex gap-2 justify-content-end col-8">
+      <button
+        *ngIf="shouldShowEditAndDeleteButton"
+        class="btn btn-danger col-3 text-truncate"
+      >
+        Delete
+      </button>
+      <a
+        *ngIf="shouldShowEditAndDeleteButton"
+        routerLink="edit"
+        class="btn btn-info col-3 text-truncate"
+        >Edit</a
+      >
+    </div>
+  </div>
+</div>
