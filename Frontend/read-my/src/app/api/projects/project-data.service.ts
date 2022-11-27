@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, tap } from 'rxjs';
+import { BehaviorSubject, flatMap, tap } from 'rxjs';
 import { ProjectResponse } from 'src/app/api/projects/models/projectResponse';
 import { ProjectService } from './project.service';
 
@@ -10,6 +10,11 @@ export class ProjectDataService {
   constructor(private projectService: ProjectService) {}
 
   projects = new BehaviorSubject<ProjectResponse[]>([]);
+
+  getProjectById(id: string) {
+    console.log(this.projects.value, id);
+    return this.projects.value.find((project) => project.id === id);
+  }
 
   fetchProjects() {
     return this.projectService.getAllProjects().pipe(
@@ -25,6 +30,16 @@ export class ProjectDataService {
         name,
         description,
       })
-      .pipe(tap(() => this.fetchProjects()));
+      .pipe(flatMap(() => this.fetchProjects()));
+  }
+
+  updateProject(name: string, description: string, id: string) {
+    return this.projectService
+      .updateProject({
+        name,
+        description,
+        id,
+      })
+      .pipe(flatMap(() => this.fetchProjects()));
   }
 }
