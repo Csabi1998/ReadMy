@@ -2,7 +2,7 @@
 {
     public class ProjectViewModel
     {
-        public ProjectViewModel(string id, string name, string description, string creator, DateTime creationDate, List<string> participants)
+        public ProjectViewModel(string id, string name, string description, ProjectParticipantViewModel creator, DateTime creationDate, List<ProjectParticipantViewModel> participants)
         {
             Id = id;
             Name = name;
@@ -15,8 +15,8 @@
         public string Id { get; }
         public string Name { get; }
         public string Description { get; }
-        public string Creator { get; }
+        public ProjectParticipantViewModel Creator { get; }
         public DateTime CreationDate { get; }
-        public List<string> Participants { get; }
+        public List<ProjectParticipantViewModel> Participants { get; }
     }
 }
