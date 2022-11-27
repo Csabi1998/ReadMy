@@ -56,5 +56,11 @@ namespace ReadMy.Controllers
             return await _mediator.Send(new AddProjektParticipantCommand(dto), cancellationToken);
         }
 
+        [HttpDelete("{id}")]
+        [Authorize(ReadMyRoles.ProjectManager)]
+        public async Task<ActionResult<DeleteEntityResponse>> DeleteProjectAsync([FromRoute] string id, CancellationToken cancellationToken)
+        {
+            return await _mediator.Send(new DeleteProjectCommand(id), cancellationToken);
+        }
     }
 }
