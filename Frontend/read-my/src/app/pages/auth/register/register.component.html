@@ -5,7 +5,7 @@
     <app-loader></app-loader>
   </div>
   <div class="col-xs-12 col-md-6 bg-light p-4 card" *ngIf="!isLoading">
-    <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+    <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
       <h3>Register Colleague</h3>
       <div class="form-group">
         <label for="fullname" class="mb-1 mt-2">Full Name</label>
@@ -70,7 +70,7 @@
         <button
           class="btn btn-primary mt-3"
           type="submit"
-          [disabled]="!authForm.valid"
+          [disabled]="!registerForm.valid"
         >
           Register
         </button>
