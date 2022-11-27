@@ -56,8 +56,8 @@
           <h5>Participants</h5>
 
           <ul>
-            <li *ngFor="let participant of participants">
-              {{ participant }}
+            <li *ngFor="let participant of projectUnderEdit!.participants">
+              {{ participant.name }}
             </li>
           </ul>
         </div>
@@ -78,8 +78,8 @@
               id="participantSelector"
             >
               <option
-                *ngFor="let participant of participants"
-                value="{{ participant }}"
+                *ngFor="let participant of projectUnderEdit!.participants"
+                value="{{ participant.name }}"
               >
                 {{ participant }}
               </option>

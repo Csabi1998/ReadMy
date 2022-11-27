@@ -47,7 +47,11 @@ const routes: Routes = [
         component: EditLogItemComponent,
       },
 
-      { path: 'projects/:id/edit', component: EditProjectComponent },
+      {
+        path: 'projects/:id/edit',
+        resolve: [ProjectResolverService],
+        component: EditProjectComponent,
+      },
       { path: '**', redirectTo: '/projects' },
     ],
   },
