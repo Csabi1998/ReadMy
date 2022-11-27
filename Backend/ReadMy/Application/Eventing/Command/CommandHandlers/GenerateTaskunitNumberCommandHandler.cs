@@ -20,15 +20,13 @@ namespace Application.Eventing.Command.CommandHandlers
         {
             var number = Guid.NewGuid()
                 .ToString()
-                .TakeLast(10)
-                .ToString();
+                .Substring(25);
 
             while (await context.Taskunits.AnyAsync(x => x.SerialNumber == number, cancellationToken))
             {
                 number = Guid.NewGuid()
                     .ToString()
-                    .TakeLast(10)
-                    .ToString();
+                    .Substring(25);
             }
 
             return number!;

@@ -12,16 +12,22 @@ using System.Text;
 
 namespace Common.Configuration
 {
-    public static class AuthenticationConfigurationExtensions
+    public static class IServiceCollectionCommonExtensions
     {
         public static IServiceCollection ConfigureAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddScoped<IJwtTokenService, JwtTokenService>();
-            services.AddScoped<IExcelService, ExcelService>();
             services.Configure<AuthorizationOptions>(configuration.GetSection(nameof(AuthorizationOptions)));
             services.ConfigureCommonAuthentication(configuration);
             services.ConfigurePolicy();
+
+            return services;
+        }
+
+        public static IServiceCollection ConfigureCommonServices(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddScoped<IExcelService, ExcelService>();
 
             return services;
         }
@@ -72,6 +78,22 @@ namespace Common.Configuration
                 .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme));
 
                 options.DefaultPolicy = options.GetPolicy(ReadMyRoles.Worker);
+            });
+
+            return services;
+        }
+
+        private static IServiceCollection ConfigureCors(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", builder =>
+                {
+                    builder.WithOrigins(configuration.GetSection("AllowedHosts").Get<string[]>())
+                           .AllowAnyMethod()
+                           .AllowAnyHeader()
+                           .AllowCredentials();
+                });
             });
 
             return services;

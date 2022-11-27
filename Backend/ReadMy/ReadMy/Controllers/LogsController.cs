@@ -3,7 +3,7 @@ using Application.Eventing.Command.Commands;
 using Application.Eventing.Command.Dtos;
 using Application.Eventing.Command.Response;
 using Application.Eventing.Query.Querys;
-
+using Application.Eventing.Query.ViewModels;
 using MediatR;
 
 using Microsoft.AspNetCore.Authorization;
@@ -23,6 +23,12 @@ namespace ReadMy.Controllers
             _mediator = mediator;
         }
 
+        [HttpGet("{taskId}")]
+        public async Task<ActionResult<LogsListViewModel>> GetLogsAsync([FromRoute] string taskId, CancellationToken cancellationToken) 
+        {
+            return await _mediator.Send(new GetLogsQuery(taskId), cancellationToken);
+        }
+        
         [HttpGet("export")]
         public async Task<ActionResult> LogsExcelExportAsync(CancellationToken cancellationToken) 
         {
