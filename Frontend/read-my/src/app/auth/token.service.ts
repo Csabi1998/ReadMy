@@ -20,8 +20,8 @@ export class TokenService {
     const token = localStorage.getItem(AppConstants.TOKEN_KEY);
     if (token === null) return null;
     const userData = jwt_decode<UserData>(token);
-    console.log(userData);
-    return userData;
+
+    return new UserData(userData.fullName, userData.role, userData.name);
   }
 
   public removeToken() {

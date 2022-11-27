@@ -28,6 +28,7 @@ import { EditTaskComponent } from './pages/tasks/edit-task/edit-task.component';
 import { TaskDetailsComponent } from './pages/tasks/task-details/task-details.component';
 import { TaskListComponent } from './pages/tasks/task-list/task-list.component';
 import { TaskDetailsCardComponent } from './pages/tasks/task-details-card/task-details-card.component';
+import { MyLogsComponent } from './pages/logs/my-logs/my-logs.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { TaskDetailsCardComponent } from './pages/tasks/task-details-card/task-d
     EditIconComponent,
     DeleteIconComponent,
     TaskDetailsCardComponent,
+    MyLogsComponent,
   ],
   imports: [
     BrowserModule,

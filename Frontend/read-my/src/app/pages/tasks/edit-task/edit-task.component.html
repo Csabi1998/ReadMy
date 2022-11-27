@@ -1,1 +1,70 @@
-<p>edit-task works!</p>
+<div
+  class="row flex-grow-1 justify-content-center justify-content-md-center align-items-center topPadding"
+>
+  <div *ngIf="isLoading" style="text-align: center">
+    <app-loader></app-loader>
+  </div>
+  <div class="col-xs-12 col-md-10 bg-light p-4 card" *ngIf="!isLoading">
+    <form #taskForm="ngForm" (ngSubmit)="onSubmit(taskForm)">
+      <h3>{{ isNew ? "New Task" : "Edit Task" }}</h3>
+
+      <div
+        class="d-flex gap-2 justify-content-between flex-wrap flex-md-nowrap"
+      >
+        <div class="form-group col-md-8 col-12">
+          <div class="form-group">
+            <label for="fullname" class="mb-1 mt-2">Task Title</label>
+            <input
+              type="text"
+              id="fullname"
+              class="form-control"
+              ngModel
+              name="fullname"
+              required
+            />
+          </div>
+        </div>
+        <div class="form-group flex-grow-1">
+          <label for="taskTypeSelector" class="mb-1 mt-2">Type</label>
+          <select
+            ngModel
+            name="taskTypeSelector"
+            class="form-select"
+            id="taskTypeSelector"
+            required
+          >
+            <option selected value="Development">Development</option>
+            <option value="Meeting">Meeting</option>
+            <option value="Learning">Learning</option>
+            <option value="Planning">Planning</option>
+            <option value="Review">Review</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="description" class="mb-1 mt-2">Description</label>
+        <textarea
+          rows="4"
+          id="description"
+          class="form-control"
+          ngModel
+          name="description"
+        ></textarea>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <button class="btn btn-secondary mt-3 col-4 col-lg-3" (click)="back()">
+          Cancel
+        </button>
+        <button
+          class="btn btn-primary mt-3 col-4 col-lg-3"
+          type="submit"
+          [disabled]="!taskForm.valid"
+        >
+          {{ isNew ? "Create" : "Save changes" }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
