@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'projects', component: ProjectsComponent },
   { path: 'projects/new', component: EditProjectComponent },
   { path: 'projects/:id', component: ProjectDetailsComponent },
+  { path: 'projects/:id/edit', component: EditProjectComponent },
   { path: '**', redirectTo: '/auth' },
 ];
 
