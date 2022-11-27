@@ -1,7 +1,9 @@
 ﻿using Application.Eventing.Command.Commands;
 using Application.Eventing.Command.Dtos;
 using Application.Eventing.Command.Response;
-
+using Application.Eventing.Query.Querys;
+using Application.Eventing.Query.ViewModels;
+using Common.Authorization;
 using MediatR;
 
 using Microsoft.AspNetCore.Authorization;
@@ -21,13 +23,21 @@ namespace ReadMy.Controllers
             _mediator = mediator;
         }
 
+        [HttpGet("{projectId}")]
+        public async Task<ActionResult<TaskunitsListViewModel>> GetTaskunitAsync([FromRoute] string projectId, CancellationToken cancellationToken)
+        {
+            return await _mediator.Send(new GetTaskunitsQuery(projectId), cancellationToken);
+        }
+        
         [HttpPost]
+        [Authorize(ReadMyRoles.ProjectManager)]
         public async Task<ActionResult<CreateTaskunitResponse>> CreateTaskunitAsync([FromBody] CreateTaskunitDto dto, CancellationToken cancellationToken)
         {
             return await _mediator.Send(new CreateTaskunitCommand(dto), cancellationToken);
         }
 
         [HttpPut]
+        [Authorize(ReadMyRoles.ProjectManager)]
         public async Task<ActionResult<UpdateTaskunitResponse>> UpdataTaskunitAsync([FromBody] UpdateTaskunitDto dto, CancellationToken cancellationToken)
         {
             return await _mediator.Send(new UpdateTaskunitCommand(dto), cancellationToken);
