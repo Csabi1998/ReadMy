@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -8,7 +9,11 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
   styleUrls: ['./edit-project.component.css'],
 })
 export class EditProjectComponent implements OnInit {
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private location: Location
+  ) {}
   isLoading = false;
   projectId?: string;
 
@@ -36,5 +41,9 @@ export class EditProjectComponent implements OnInit {
     if (!form.valid) {
       return;
     }
+  }
+
+  back(): void {
+    this.location.back();
   }
 }
