@@ -2,12 +2,14 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'app-edit-project',
-  templateUrl: './edit-project.component.html',
-  styleUrls: ['./edit-project.component.css'],
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css'],
 })
-export class EditProjectComponent {
+export class RegisterComponent {
   isLoading = false;
+
+  constructor() {}
 
   onSubmit(form: NgForm) {
     console.log(form.value);

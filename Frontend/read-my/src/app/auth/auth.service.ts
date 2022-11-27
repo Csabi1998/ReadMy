@@ -30,10 +30,11 @@ export class AuthService {
     this.router.navigate(['/auth']);
   }
 
-  private handleAuth(res: LoginResponse) {
+  private handleAuth = (res: LoginResponse) => {
+    console.log(this.tokenService);
     this.tokenService.token = res.token || null;
     this.user.next(this.tokenService.userData);
-  }
+  };
 
   public autoLogin() {
     const userData = this.tokenService.userData;

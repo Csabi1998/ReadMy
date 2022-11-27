@@ -1,0 +1,80 @@
+<div
+  class="row flex-grow-1 justify-content-center justify-content-md-center align-items-center topPadding"
+>
+  <div *ngIf="isLoading" style="text-align: center">
+    <app-loader></app-loader>
+  </div>
+  <div class="col-xs-12 col-md-6 bg-light p-4 card" *ngIf="!isLoading">
+    <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+      <h3>Register Colleague</h3>
+      <div class="form-group">
+        <label for="fullname" class="mb-1 mt-2">Full Name</label>
+        <input
+          type="text"
+          id="fullname"
+          class="form-control"
+          ngModel
+          name="fullname"
+          required
+        />
+      </div>
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap">
+        <div class="form-group col-md-7 col-12">
+          <label for="username" class="mb-1 mt-2">Username</label>
+          <input
+            type="text"
+            id="username"
+            class="form-control"
+            ngModel
+            name="username"
+            required
+            minlength="4"
+          />
+        </div>
+        <div class="form-group col-md-4 col-12">
+          <label for="roleSelector" class="mb-1 mt-2">Role</label>
+          <select
+            ngModel
+            name="roleSelector"
+            class="form-select"
+            id="roleSelector"
+          >
+            <option selected="selected" value="Worker">Colleague</option>
+            <option value="Project manager">PM</option>
+            <option value="Admin">Admin</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="mb-1 mt-2">Initial Password</label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          ngModel
+          name="password"
+          required
+          minlength="4"
+        />
+      </div>
+      <p class="mt-3 mb-0 fw-bolder text-uppercase">Important notice!</p>
+      <p class="m-0 fw-lighter fst-italic">
+        <small>
+          Your colleague will receive an e-mail with the login credentials you
+          provided above. They need to log in within a day and change their
+          password or their user will be deleted automatically.
+        </small>
+      </p>
+      <div class="d-flex justify-content-end">
+        <button
+          class="btn btn-primary mt-3"
+          type="submit"
+          [disabled]="!authForm.valid"
+        >
+          Register
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
