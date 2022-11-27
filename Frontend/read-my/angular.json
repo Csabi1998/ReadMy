@@ -39,7 +39,10 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -75,8 +78,7 @@
               "browserTarget": "read-my:build:production"
             },
             "development": {
-              "browserTarget": "read-my:build:development",
-              "proxyConfig": "src/proxy.conf.js"
+              "browserTarget": "read-my:build:development"
             }
           },
           "defaultConfiguration": "development"
