@@ -4,6 +4,8 @@ import { catchError, map, Observable, tap } from 'rxjs';
 import handleError from '../handleError';
 import { LoginDto } from './models/loginDto';
 import { LoginResponse } from './models/loginResponse';
+import { RegisterDto } from './models/registerDto';
+import { RegisterResponse } from './models/registerResponse';
 import { UserResponse } from './models/userResponse';
 import { UsersListResponse } from './models/usersListResponse';
 
@@ -25,6 +27,13 @@ export class UserService {
 
   login(loginDto: LoginDto): Observable<LoginResponse> {
     return this.httpClient.post('Users/login', loginDto).pipe(
+      tap((response) => console.log(response)),
+      catchError(handleError)
+    );
+  }
+
+  register(registerDto: RegisterDto): Observable<RegisterResponse> {
+    return this.httpClient.post('Users/register', registerDto).pipe(
       tap((response) => console.log(response)),
       catchError(handleError)
     );
