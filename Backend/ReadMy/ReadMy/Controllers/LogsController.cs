@@ -44,16 +44,21 @@ namespace ReadMy.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<CreateLogResponse>> CreateTaskunitAsync([FromBody] CreateLogDto dto, CancellationToken cancellationToken)
+        public async Task<ActionResult<CreateLogResponse>> CreateLogAsync([FromBody] CreateLogDto dto, CancellationToken cancellationToken)
         {
             return await _mediator.Send(new CreateLogCommand(dto), cancellationToken);
         }
 
         [HttpPut]
-        public async Task<ActionResult<UpdateLogResponse>> UpdataTaskunitAsync([FromBody] UpdateLogDto dto, CancellationToken cancellationToken)
+        public async Task<ActionResult<UpdateLogResponse>> UpdataLogAsync([FromBody] UpdateLogDto dto, CancellationToken cancellationToken)
         {
             return await _mediator.Send(new UpdateLogCommand(dto), cancellationToken);
         }
-
+        
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<DeleteEntityResponse>> DeleteLogAsync([FromRoute] string id, CancellationToken cancellationToken)
+        {
+            return await _mediator.Send(new DeleteLogCommand(id), cancellationToken);
+        }
     }
 }
