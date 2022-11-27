@@ -8,15 +8,15 @@ export class UserData {
     this.fullName = FullName;
   }
 
-  public get isAdmin() {
+  get isAdmin() {
     return this.role === 'Admin';
   }
 
-  public get isPM() {
+  get isPM() {
     return this.role === 'Project manager';
   }
 
-  public get isWorker() {
+  get isWorker() {
     return this.role === 'Worker';
   }
 }
