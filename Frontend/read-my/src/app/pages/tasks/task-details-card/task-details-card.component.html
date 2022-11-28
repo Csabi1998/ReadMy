@@ -22,6 +22,7 @@
 
     <div class="d-flex gap-2 justify-content-end col-8">
       <button
+        (click)="deleteTask()"
         *ngIf="shouldShowEditAndDeleteButton"
         class="btn btn-danger col-3 col-md-2 text-truncate"
       >
