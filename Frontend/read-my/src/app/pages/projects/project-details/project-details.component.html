@@ -1,9 +1,9 @@
 <div class="mt-5">
   <app-project-card
-    [project]="projectDetails.project"
+    [project]="project"
     [shouldShowDetailsButton]="false"
     [shouldShowEditAndDeleteButton]="true"
     [shouldShowBackButton]="true"
   ></app-project-card>
-  <app-task-list></app-task-list>
+  <app-task-list [tasks]="taskList"></app-task-list>
 </div>

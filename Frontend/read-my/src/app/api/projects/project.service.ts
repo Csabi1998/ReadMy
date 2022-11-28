@@ -29,7 +29,6 @@ export class ProjectService {
   }
 
   getAllProjects(): Observable<ProjectResponse[]> {
-    console.log('getAllProjects called');
     return this.httpClient.get('Projects').pipe(
       map((projectList: ProjectsListResponse) => projectList.projects ?? []),
       tap((response) => console.log(response)),

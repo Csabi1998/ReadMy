@@ -25,7 +25,6 @@ export class EditProjectComponent implements OnInit, AfterViewInit, OnDestroy {
     private location: Location,
     private projectDataService: ProjectDataService,
     private userDataService: UserDataService,
-
     private toastr: ToastrService
   ) {}
 
@@ -51,7 +50,6 @@ export class EditProjectComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();
-    this.projectDataService.clearSelectedProject();
   }
 
   get possibleNewParticipants() {
@@ -80,8 +78,6 @@ export class EditProjectComponent implements OnInit, AfterViewInit, OnDestroy {
         this.toastr.error('Project not found');
         this.location.back();
       }
-
-      console.log(this.projectUnderEdit);
     }
   }
 

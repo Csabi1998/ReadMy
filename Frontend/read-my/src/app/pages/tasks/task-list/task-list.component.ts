@@ -1,31 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { TaskUnitResponse } from 'src/app/api/tasks/models/taskunitResponse';
 
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
 })
 export class TaskListComponent {
-  tasks = [
-    {
-      id: '1',
-      name: 'Task 1',
-      description: 'Description 1',
-      type: 'Meeting',
-      totalHours: 10,
-    },
-    {
-      id: '2',
-      name: 'Task 2',
-      description: 'Description 1',
-      type: 'Meeting',
-      totalHours: 10,
-    },
-    {
-      id: '3',
-      name: 'Task 3',
-      description: 'Description 1',
-      type: 'Meeting',
-      totalHours: 10,
-    },
-  ];
+  @Input('tasks') tasks: TaskUnitResponse[] = [];
 }
