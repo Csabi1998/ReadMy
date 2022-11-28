@@ -1,15 +1,20 @@
 <div class="mt-5">
   <div class="d-flex justify-content-between mb-3">
     <h3 class="m-0">Tasks</h3>
-    <div class="d-flex gap-2 justify-content-between">
+    <!-- <div class="d-flex gap-2 justify-content-between">
       <button class="btn btn-danger text-truncate">
         <app-arrow-down-icon></app-arrow-down-icon> Name
       </button>
       <button class="btn btn-danger text-truncate">
         <app-arrow-up-icon></app-arrow-up-icon> Hours
       </button>
-      <a routerLink="tasks/new" class="btn btn-primary text-truncate">New</a>
-    </div>
+    </div> -->
+    <a
+      routerLink="tasks/new"
+      class="btn btn-primary text-truncate"
+      *ngIf="!isWorker"
+      >New</a
+    >
   </div>
   <hr />
   <div class="row justify-content-center topPadding" *ngIf="!tasks.length">
@@ -26,7 +31,7 @@
       </div>
       <div class="flex-column d-flex align-items-end">
         <p class="mb-2 p-0 text-black-50">{{ task.sumOfLogs }} hours total</p>
-        <div class="btn-group">
+        <div class="btn-group" *ngIf="!isWorker">
           <a
             class="btn btn-xs btn-outline-info"
             routerLink="tasks/{{ task.id }}/edit"

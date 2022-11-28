@@ -3,6 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TaskUnitResponse } from 'src/app/api/tasks/models/taskunitResponse';
 import { TaskDataService } from 'src/app/api/tasks/task-data.service';
+import { AuthService } from 'src/app/auth/auth.service';
 import { LogsDataService } from './../../../api/logs/logs-data.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class TaskDetailsComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private logsDataService: LogsDataService,
-    private taskDataService: TaskDataService
+    private taskDataService: TaskDataService,
+    private authService: AuthService
   ) {}
   task!: TaskUnitResponse;
 
@@ -32,6 +34,10 @@ export class TaskDetailsComponent implements OnInit, OnDestroy {
 
       this.task = this.taskDataService.selectedTask.value!;
     });
+  }
+
+  get isWorker(): boolean {
+    return this.authService.isWorker;
   }
 
   ngOnDestroy() {

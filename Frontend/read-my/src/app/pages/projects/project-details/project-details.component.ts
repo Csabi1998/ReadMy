@@ -5,6 +5,7 @@ import { ProjectResponse } from 'src/app/api/projects/models/projectResponse';
 import { ProjectDataService } from 'src/app/api/projects/project-data.service';
 import { TaskUnitResponse } from 'src/app/api/tasks/models/taskunitResponse';
 import { TaskDataService } from 'src/app/api/tasks/task-data.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-project-details',
@@ -15,13 +16,18 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private projectDataService: ProjectDataService,
-    private taskDataService: TaskDataService
+    private taskDataService: TaskDataService,
+    private authService: AuthService
   ) {}
   project!: ProjectResponse;
   taskList: TaskUnitResponse[] = [];
   projectSub!: Subscription;
   taskListSub!: Subscription;
   projectId?: string;
+
+  get isWorker(): boolean {
+    return this.authService.isWorker;
+  }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
@@ -34,8 +40,10 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
       this.taskListSub = this.taskDataService.tasks.subscribe((taskList) => {
         this.taskList = taskList.slice();
       });
+      let project = this.projectDataService.selectedProject.value;
 
-      this.project = this.projectDataService.selectedProject.value!;
+      this.project = project!;
+
       this.taskList = this.taskDataService.tasks.value.slice();
     });
   }

@@ -3,6 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { TaskUnitResponse } from 'src/app/api/tasks/models/taskunitResponse';
 import { TaskDataService } from 'src/app/api/tasks/task-data.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-task-list',
@@ -15,7 +16,8 @@ export class TaskListComponent implements OnInit {
     private taskDataService: TaskDataService,
     private route: ActivatedRoute,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -25,6 +27,10 @@ export class TaskListComponent implements OnInit {
   }
 
   projectId!: string;
+
+  get isWorker(): boolean {
+    return this.authService.isWorker;
+  }
 
   deleteTask(taskId: string) {
     const obs = this.taskDataService.deleteTask(taskId, this.projectId);
