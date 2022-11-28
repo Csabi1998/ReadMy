@@ -35,7 +35,11 @@
         ></textarea>
       </div>
       <div class="d-flex justify-content-between">
-        <button class="btn btn-secondary mt-3 col-4 col-lg-3" (click)="back()">
+        <button
+          class="btn btn-secondary mt-3 col-4 col-lg-3"
+          type="button"
+          (click)="back()"
+        >
           Cancel
         </button>
         <button
@@ -54,7 +58,9 @@
       >
         <div class="col-md-7 col-12">
           <h5>Participants</h5>
-
+          <p *ngIf="!projectUnderEdit!.participants.length" class="m-0">
+            No participants added
+          </p>
           <ul>
             <li *ngFor="let participant of projectUnderEdit!.participants">
               {{ participant.name }}
@@ -72,16 +78,17 @@
               >Add new participant</label
             >
             <select
+              [disabled]="!possibleNewParticipants.length"
               ngModel
               name="participantSelector"
               class="form-select col-12"
               id="participantSelector"
             >
               <option
-                *ngFor="let participant of projectUnderEdit!.participants"
-                value="{{ participant.name }}"
+                *ngFor="let participant of possibleNewParticipants"
+                value="{{ participant.id }}"
               >
-                {{ participant }}
+                {{ participant.name }}
               </option>
             </select>
           </div>
