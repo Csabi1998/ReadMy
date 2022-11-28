@@ -24,7 +24,6 @@ export class SingleProjectResolverService implements Resolve<ProjectResponse> {
       this.projectDataService.setSelectedProject(currentlyNeededProject.id);
       return currentlyNeededProject;
     } else {
-      console.log('fetching project with id: ' + route.params['id']);
       return this.projectDataService.fetchProjectById(route.params['id']);
     }
   }
