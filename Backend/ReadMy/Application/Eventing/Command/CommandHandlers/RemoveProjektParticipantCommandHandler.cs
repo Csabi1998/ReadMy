@@ -15,17 +15,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Eventing.Command.CommandHandlers
 {
-    public class AddProjektParticipantCommandHandler : IRequestHandler<AddProjektParticipantCommand, UpdateEntityResponse>
+    public class RemoveProjektParticipantCommandHandler : IRequestHandler<RemoveProjektParticipantCommand, UpdateEntityResponse>
     {
         private readonly ReadMyDbContext _context;
         private readonly ICurrentUserService _userService;
 
-        public AddProjektParticipantCommandHandler(ReadMyDbContext context, ICurrentUserService userService)
+        public RemoveProjektParticipantCommandHandler(ReadMyDbContext context, ICurrentUserService userService)
         {
             _context = context;
             _userService = userService;
         }
-        public async Task<UpdateEntityResponse> Handle(AddProjektParticipantCommand request, CancellationToken cancellationToken)
+        public async Task<UpdateEntityResponse> Handle(RemoveProjektParticipantCommand request, CancellationToken cancellationToken)
         {
             var projekt = await _context.Projects
                 .Include(x => x.Participants)
@@ -41,14 +41,7 @@ namespace Application.Eventing.Command.CommandHandlers
                 throw new BusinessException(ProjektMessages.ProjektModifyOnlyCreator);
             }
 
-            var user = await _context.Users.SingleOrDefaultAsync(x => x.Id == request.Dto.UserId, cancellationToken);
-
-            if (user is null)
-            {
-                throw new BusinessException(UserMessages.UserNotFound);
-            }
-
-            projekt.PutParticipantOnProject(user);
+            projekt.TakeParticipantOffProject(request.Dto.UserId);
             
             await _context.SaveChangesAsync(cancellationToken);
 
