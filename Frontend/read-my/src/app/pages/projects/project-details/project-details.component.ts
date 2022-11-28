@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ProjectResponse } from 'src/app/api/projects/models/projectResponse';
 
 @Component({
   selector: 'app-project-details',
@@ -6,15 +7,20 @@ import { Component } from '@angular/core';
   styleUrls: ['./project-details.component.css'],
 })
 export class ProjectDetailsComponent {
-  projectDetails = {
-    project: {
+  project: ProjectResponse = {
+    id: '1',
+    name: 'Project 1',
+    description: 'Project 1 description',
+    participants: [],
+    creationDate: new Date(),
+    creator: {
       id: '1',
-      name: 'Project 1',
-      description: 'Description 1',
-      creator: 'Creator 1',
-      creationDate: new Date(),
-      participants: ['Participant 1', 'Participant 2'],
+      name: 'User 1',
     },
+  };
+
+  projectDetails = {
+    project: this.project,
     tasks: [
       {
         id: '1',

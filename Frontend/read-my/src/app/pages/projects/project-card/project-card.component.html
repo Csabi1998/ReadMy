@@ -4,7 +4,7 @@
     <p class="fw-semibold text-black-50">{{ project.creationDate | date }}</p>
   </div>
   <p class="card-text">
-    {{ project.participants.join(", ") }}
+    {{ participants.length ? participants : "No participants added" }}
   </p>
   <p class="card-text">
     {{ project.description }}
@@ -23,6 +23,7 @@
       <button
         *ngIf="shouldShowEditAndDeleteButton"
         class="btn btn-danger col-4 col-lg-3 text-truncate"
+        (click)="deleteProject()"
       >
         Delete
       </button>
