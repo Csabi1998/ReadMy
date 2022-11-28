@@ -4,7 +4,6 @@ import { Subscription } from 'rxjs';
 import { TaskUnitResponse } from 'src/app/api/tasks/models/taskunitResponse';
 import { TaskDataService } from 'src/app/api/tasks/task-data.service';
 import { LogsDataService } from './../../../api/logs/logs-data.service';
-import { LogItemResponse } from './../../../api/logs/models/logItemResponse';
 
 @Component({
   selector: 'app-task-details',
@@ -18,9 +17,8 @@ export class TaskDetailsComponent implements OnInit, OnDestroy {
     private taskDataService: TaskDataService
   ) {}
   task!: TaskUnitResponse;
-  logList: LogItemResponse[] = [];
+
   taskSub!: Subscription;
-  logListSub!: Subscription;
   projectId!: string;
   taskId!: string;
 
@@ -31,17 +29,12 @@ export class TaskDetailsComponent implements OnInit, OnDestroy {
       this.taskSub = this.taskDataService.selectedTask.subscribe((task) => {
         this.task = task!;
       });
-      this.logListSub = this.logsDataService.logs.subscribe((logList) => {
-        this.logList = logList.slice();
-      });
 
       this.task = this.taskDataService.selectedTask.value!;
-      this.logList = this.logsDataService.logs.value.slice();
     });
   }
 
   ngOnDestroy() {
     this.taskSub.unsubscribe();
-    this.logListSub.unsubscribe();
   }
 }
