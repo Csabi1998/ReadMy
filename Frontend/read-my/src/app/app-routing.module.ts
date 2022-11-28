@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LogResolverService } from './api/logs/log-resolver.service';
 import { ProjectResolverService } from './api/projects/project-resolver.service';
 import { SingleProjectResolverService } from './api/projects/single-project-resolver.service';
 import { SingleTaskResolverService } from './api/tasks/single-task-resolver.service';
@@ -47,7 +48,7 @@ const routes: Routes = [
       },
       {
         path: 'projects/:id/tasks/:taskId',
-        resolve: [SingleTaskResolverService],
+        resolve: [SingleTaskResolverService, LogResolverService],
         component: TaskDetailsComponent,
       },
       {

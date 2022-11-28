@@ -36,7 +36,12 @@ export class TaskDataService {
     );
   }
 
-  addTask(name: string, description: string, type: string, projectId: string) {
+  createTask(
+    name: string,
+    description: string,
+    type: string,
+    projectId: string
+  ) {
     return this.taskService
       .createTask({
         name,
