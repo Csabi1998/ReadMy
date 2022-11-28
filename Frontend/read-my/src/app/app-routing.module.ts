@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProjectResolverService } from './api/projects/project-resolver.service';
+import { UserResolverService } from './api/users/user-resolver.service';
 import { AdminGuard } from './auth/admin.guard';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthComponent } from './pages/auth/auth.component';
@@ -49,7 +50,7 @@ const routes: Routes = [
 
       {
         path: 'projects/:id/edit',
-        resolve: [ProjectResolverService],
+        resolve: [ProjectResolverService, UserResolverService],
         component: EditProjectComponent,
       },
       { path: '**', redirectTo: '/projects' },
