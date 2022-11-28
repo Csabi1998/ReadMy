@@ -57,4 +57,22 @@ public class Project
         Description = description;
     }
 
+    public void PutParticipantOnProject(ReadMyUser participant) 
+    {
+        if(!Participants.Any(x => x.Id == participant.Id)) 
+        {
+            Participants.Add(participant);
+        }  
+    }
+    
+    public void TakeParticipantOffProject(string participantId) 
+    {
+        var participant = Participants.SingleOrDefault(x => x.Id == participantId);
+        
+        if(participant != null) 
+        {
+            Participants.Remove(participant);
+        }  
+    }
+
 }
