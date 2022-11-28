@@ -57,6 +57,7 @@ const routes: Routes = [
       },
       {
         path: 'my-logs',
+        resolve: [LogResolverService],
         component: MyLogsComponent,
       },
       {
