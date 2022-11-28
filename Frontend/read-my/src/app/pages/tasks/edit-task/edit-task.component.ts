@@ -46,7 +46,7 @@ export class EditTaskComponent implements OnInit, AfterViewInit, OnDestroy {
     this.isLoading = true;
 
     if (this.isNew) {
-      const createTaskObs = this.taskDataService.addTask(
+      const createTaskObs = this.taskDataService.createTask(
         name,
         description,
         type,
