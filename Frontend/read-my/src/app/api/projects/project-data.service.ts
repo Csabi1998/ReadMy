@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, flatMap, tap } from 'rxjs';
+import { BehaviorSubject, combineLatest, flatMap, tap } from 'rxjs';
 import { ProjectResponse } from 'src/app/api/projects/models/projectResponse';
 import { ProjectService } from './project.service';
 
@@ -56,7 +56,11 @@ export class ProjectDataService {
         projektId,
         userId,
       })
-      .pipe(flatMap(() => this.fetchProjectById(projektId)));
+      .pipe(
+        flatMap(() =>
+          combineLatest(this.fetchProjectById(projektId), this.fetchProjects())
+        )
+      );
   }
 
   updateProject(name: string, description: string, id: string) {
