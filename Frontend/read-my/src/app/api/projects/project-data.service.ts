@@ -12,6 +12,11 @@ export class ProjectDataService {
   projects = new BehaviorSubject<ProjectResponse[]>([]);
   selectedProject = new BehaviorSubject<ProjectResponse | undefined>(undefined);
 
+  clearProjects() {
+    this.projects.next([]);
+    this.selectedProject.next(undefined);
+  }
+
   setSelectedProject(id: string) {
     this.selectedProject.next(this.getProjectById(id));
   }

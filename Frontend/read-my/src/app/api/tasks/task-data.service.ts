@@ -16,6 +16,11 @@ export class TaskDataService {
     this.selectedTask.next(this.getTaskById(id));
   }
 
+  clearTasks() {
+    this.tasks.next([]);
+    this.selectedTask.next(undefined);
+  }
+
   fetchTasks(projectId: string) {
     return this.taskService.getTasksOfProject(projectId).pipe(
       tap((tasks) => {
