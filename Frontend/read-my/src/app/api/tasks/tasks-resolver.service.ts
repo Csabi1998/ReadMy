@@ -21,7 +21,6 @@ export class TasksResolverService implements Resolve<TaskUnitResponse[]> {
     | Observable<TaskUnitResponse[]>
     | Promise<TaskUnitResponse[]> {
     const projectId = route.params['id'];
-    console.log('fetching tasks for project: ' + projectId);
     return this.taskDataService.fetchTasks(projectId);
   }
 }
