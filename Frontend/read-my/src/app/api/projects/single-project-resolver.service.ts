@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   Resolve,
+  Router,
   RouterStateSnapshot,
 } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { ProjectResponse } from './models/projectResponse';
 import { ProjectDataService } from './project-data.service';
@@ -12,7 +14,11 @@ import { ProjectDataService } from './project-data.service';
   providedIn: 'root',
 })
 export class SingleProjectResolverService implements Resolve<ProjectResponse> {
-  constructor(private projectDataService: ProjectDataService) {}
+  constructor(
+    private projectDataService: ProjectDataService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -24,7 +30,22 @@ export class SingleProjectResolverService implements Resolve<ProjectResponse> {
       this.projectDataService.setSelectedProject(currentlyNeededProject.id);
       return currentlyNeededProject;
     } else {
-      return this.projectDataService.fetchProjectById(route.params['id']);
+      let fetchedProject!: ProjectResponse;
+      this.projectDataService.fetchProjectById(route.params['id']).subscribe({
+        next: (project) => {
+          fetchedProject = project;
+        },
+        error: (err) => {
+          {
+            this.toastr.warning(
+              'Go back quickly before they notice!',
+              'Who goes here?!'
+            );
+            this.router.navigate(['/']);
+          }
+        },
+      });
+      return fetchedProject;
     }
   }
 }

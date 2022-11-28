@@ -2,7 +2,7 @@
   <app-project-card
     [project]="project"
     [shouldShowDetailsButton]="false"
-    [shouldShowEditAndDeleteButton]="true"
+    [shouldShowEditAndDeleteButton]="!isWorker"
     [shouldShowBackButton]="true"
   ></app-project-card>
   <app-task-list [tasks]="taskList"></app-task-list>
