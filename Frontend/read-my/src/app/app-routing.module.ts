@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProjectResolverService } from './api/projects/project-resolver.service';
+import { SingleProjectResolverService } from './api/projects/single-project-resolver.service';
+import { TasksResolverService } from './api/tasks/tasks-resolver.service';
 import { UserResolverService } from './api/users/user-resolver.service';
 import { AdminGuard } from './auth/admin.guard';
 import { AuthGuard } from './auth/auth.guard';
@@ -31,7 +33,11 @@ const routes: Routes = [
         component: ProjectsComponent,
       },
       { path: 'projects/new', component: EditProjectComponent },
-      { path: 'projects/:id', component: ProjectDetailsComponent },
+      {
+        path: 'projects/:id',
+        resolve: [SingleProjectResolverService, TasksResolverService],
+        component: ProjectDetailsComponent,
+      },
       { path: 'projects/:id/tasks/new', component: EditTaskComponent },
       { path: 'projects/:id/tasks/:taskId/edit', component: EditTaskComponent },
       { path: 'projects/:id/tasks/:taskId', component: TaskDetailsComponent },

@@ -1,48 +1,51 @@
-import { Component } from '@angular/core';
+import { Location } from '@angular/common';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { ProjectResponse } from 'src/app/api/projects/models/projectResponse';
+import { ProjectDataService } from 'src/app/api/projects/project-data.service';
+import { TaskUnitResponse } from 'src/app/api/tasks/models/taskunitResponse';
+import { TaskDataService } from 'src/app/api/tasks/task-data.service';
 
 @Component({
   selector: 'app-project-details',
   templateUrl: './project-details.component.html',
   styleUrls: ['./project-details.component.css'],
 })
-export class ProjectDetailsComponent {
-  project: ProjectResponse = {
-    id: '1',
-    name: 'Project 1',
-    description: 'Project 1 description',
-    participants: [],
-    creationDate: new Date(),
-    creator: {
-      id: '1',
-      name: 'User 1',
-    },
-  };
+export class ProjectDetailsComponent implements OnInit, OnDestroy {
+  constructor(
+    private route: ActivatedRoute,
+    private location: Location,
+    private projectDataService: ProjectDataService,
+    private taskDataService: TaskDataService,
+    private toastr: ToastrService
+  ) {}
+  project!: ProjectResponse;
+  taskList: TaskUnitResponse[] = [];
+  projectSub!: Subscription;
+  taskListSub!: Subscription;
+  projectId?: string;
 
-  projectDetails = {
-    project: this.project,
-    tasks: [
-      {
-        id: '1',
-        name: 'Task 1',
-        description: 'Description 1',
-        type: 'Meeting',
-        totalHours: 10,
-      },
-      {
-        id: '2',
-        name: 'Task 2',
-        description: 'Description 1',
-        type: 'Meeting',
-        totalHours: 10,
-      },
-      {
-        id: '3',
-        name: 'Task 3',
-        description: 'Description 1',
-        type: 'Meeting',
-        totalHours: 10,
-      },
-    ],
-  };
+  ngOnInit() {
+    this.route.params.subscribe((params: Params) => {
+      this.projectId = params['id'];
+      this.projectSub = this.projectDataService.selectedProject.subscribe(
+        (project) => {
+          this.project = project!;
+        }
+      );
+      this.taskListSub = this.taskDataService.tasks.subscribe((taskList) => {
+        this.taskList = taskList.slice();
+      });
+
+      this.project = this.projectDataService.selectedProject.value!;
+      this.taskList = this.taskDataService.tasks.value.slice();
+    });
+  }
+
+  ngOnDestroy() {
+    this.projectSub.unsubscribe();
+    this.taskListSub.unsubscribe();
+  }
 }
