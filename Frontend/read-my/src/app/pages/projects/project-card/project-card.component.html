@@ -1,7 +1,9 @@
 <div class="card card-body">
   <div class="d-flex justify-content-between">
     <h5 class="card-title">{{ project.name }}</h5>
-    <p class="fw-semibold text-black-50">{{ project.creationDate | date }}</p>
+    <p class="fw-semibold text-black-50">
+      {{ project.creator.name }} - {{ project.creationDate | date }}
+    </p>
   </div>
   <p class="card-text">
     {{ participants.length ? participants : "No participants added" }}
