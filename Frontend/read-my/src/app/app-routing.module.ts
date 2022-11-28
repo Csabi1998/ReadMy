@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProjectResolverService } from './api/projects/project-resolver.service';
 import { SingleProjectResolverService } from './api/projects/single-project-resolver.service';
+import { SingleTaskResolverService } from './api/tasks/single-task-resolver.service';
 import { TasksResolverService } from './api/tasks/tasks-resolver.service';
 import { UserResolverService } from './api/users/user-resolver.service';
 import { AdminGuard } from './auth/admin.guard';
@@ -44,7 +45,11 @@ const routes: Routes = [
         resolve: [TasksResolverService],
         component: EditTaskComponent,
       },
-      { path: 'projects/:id/tasks/:taskId', component: TaskDetailsComponent },
+      {
+        path: 'projects/:id/tasks/:taskId',
+        resolve: [SingleTaskResolverService],
+        component: TaskDetailsComponent,
+      },
       {
         path: 'projects/:id/tasks/:taskId/logs/new',
         component: EditLogItemComponent,

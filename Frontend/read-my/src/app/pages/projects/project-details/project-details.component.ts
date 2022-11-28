@@ -1,7 +1,5 @@
-import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { ProjectResponse } from 'src/app/api/projects/models/projectResponse';
 import { ProjectDataService } from 'src/app/api/projects/project-data.service';
@@ -16,10 +14,8 @@ import { TaskDataService } from 'src/app/api/tasks/task-data.service';
 export class ProjectDetailsComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
-    private location: Location,
     private projectDataService: ProjectDataService,
-    private taskDataService: TaskDataService,
-    private toastr: ToastrService
+    private taskDataService: TaskDataService
   ) {}
   project!: ProjectResponse;
   taskList: TaskUnitResponse[] = [];
