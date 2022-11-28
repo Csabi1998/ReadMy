@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { TaskDataService } from 'src/app/api/tasks/task-data.service';
+import { LogsDataService } from '../api/logs/logs-data.service';
+import { ProjectDataService } from '../api/projects/project-data.service';
 import { LoginResponse } from '../api/users/models/loginResponse';
 import { UserData } from '../api/users/models/userData';
+import { UserDataService } from '../api/users/user-data.service';
 import { UserService } from './../api/users/user.service';
 import { TokenService } from './token.service';
 
@@ -15,7 +19,11 @@ export class AuthService {
   constructor(
     private tokenService: TokenService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private taskDataService: TaskDataService,
+    private logsDataService: LogsDataService,
+    private projectDataService: ProjectDataService,
+    private userDataService: UserDataService
   ) {}
 
   public login(username: string, password: string): Observable<any> {
@@ -27,6 +35,11 @@ export class AuthService {
   public logout() {
     this.user.next(null);
     this.tokenService.removeToken();
+    this.logsDataService.clearLogs();
+    this.userDataService.clearUsers();
+    this.taskDataService.clearTasks();
+    this.projectDataService.clearProjects();
+
     this.router.navigate(['/auth']);
   }
 
