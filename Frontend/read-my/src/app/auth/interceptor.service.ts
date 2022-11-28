@@ -25,7 +25,6 @@ export class InterceptorService implements HttpInterceptor {
         `Bearer ${this.tokenService.token}`
       ),
     });
-    console.log('request: ', modifiedReq);
     return next.handle(modifiedReq);
   }
 }

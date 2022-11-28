@@ -21,7 +21,6 @@ export class ProjectDataService {
   }
 
   getProjectById(id: string) {
-    console.log(this.projects.value, id);
     return this.projects.value.find((project) => project.id === id);
   }
 
@@ -36,6 +35,7 @@ export class ProjectDataService {
   fetchProjectById(id: string) {
     return this.projectService.getProjectById(id).pipe(
       tap((project) => {
+        console.log(project);
         this.selectedProject.next(project);
       })
     );
