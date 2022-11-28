@@ -47,8 +47,8 @@ export class TaskService {
     );
   }
 
-  getTaskById(projectId: string): Observable<TaskUnitResponse> {
-    return this.httpClient.get(`Tasks/${projectId}`).pipe(
+  getTaskById(taskId: string): Observable<TaskUnitResponse> {
+    return this.httpClient.get(`Tasks/${taskId}`).pipe(
       tap((response: any) => console.log(response)),
       catchError(handleError)
     );

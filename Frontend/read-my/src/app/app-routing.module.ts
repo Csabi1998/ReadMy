@@ -39,7 +39,11 @@ const routes: Routes = [
         component: ProjectDetailsComponent,
       },
       { path: 'projects/:id/tasks/new', component: EditTaskComponent },
-      { path: 'projects/:id/tasks/:taskId/edit', component: EditTaskComponent },
+      {
+        path: 'projects/:id/tasks/:taskId/edit',
+        resolve: [TasksResolverService],
+        component: EditTaskComponent,
+      },
       { path: 'projects/:id/tasks/:taskId', component: TaskDetailsComponent },
       {
         path: 'projects/:id/tasks/:taskId/logs/new',
