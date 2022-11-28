@@ -23,10 +23,16 @@ namespace ReadMy.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("list/{taskId}")]
-        public async Task<ActionResult<LogsListViewModel>> GetLogsAsync([FromRoute] string taskId, CancellationToken cancellationToken) 
+        [HttpGet]
+        public async Task<ActionResult<LogsListViewModel>> GetLogsAsync(CancellationToken cancellationToken) 
         {
-            return await _mediator.Send(new GetLogsQuery(taskId), cancellationToken);
+            return await _mediator.Send(new GetLogsQuery(), cancellationToken);
+        }
+        
+        [HttpGet("list/{taskId}")]
+        public async Task<ActionResult<LogsListViewModel>> GetLogsByTaskIdAsync([FromRoute] string taskId, CancellationToken cancellationToken) 
+        {
+            return await _mediator.Send(new GetLogsByTaskIdQuery(taskId), cancellationToken);
         }
         
         [HttpGet("{id}")]
