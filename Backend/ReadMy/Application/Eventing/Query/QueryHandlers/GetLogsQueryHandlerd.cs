@@ -24,7 +24,7 @@ namespace Application.Eventing.Query.QueryHandlers
         public async Task<LogsListViewModel> Handle(GetLogsQuery request, CancellationToken cancellationToken)
         {
             var logs = await _context.Logs
-                .Where(x => _userService.User.Role != ReadMyRoles.Worker || x.CreatorId == _userService.User.UserId)
+                .Where(x => x.CreatorId == _userService.User.UserId)
                 .Select(x => new LogViewModel(x.Id, x.WorkingHours, x.CreationDate, x.Name, x.Description, x.Type, x.Creator.FullName))
                 .ToListAsync(cancellationToken);
 
