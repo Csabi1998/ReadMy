@@ -18,4 +18,8 @@ export class UserDataService {
       })
     );
   }
+
+  clearUsers() {
+    this.users.next([]);
+  }
 }
