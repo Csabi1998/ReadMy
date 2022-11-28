@@ -3,7 +3,8 @@ export class UserData {
   constructor(
     FullName: string,
     public role: 'Admin' | 'Project manager' | 'Worker',
-    public name: string
+    public name: string,
+    public id: string
   ) {
     this.fullName = FullName;
   }

@@ -21,7 +21,12 @@ export class TokenService {
     if (token === null) return null;
     const userData = jwt_decode<UserData>(token);
 
-    return new UserData(userData.fullName, userData.role, userData.name);
+    return new UserData(
+      userData.fullName,
+      userData.role,
+      userData.name,
+      userData.id
+    );
   }
 
   public removeToken() {

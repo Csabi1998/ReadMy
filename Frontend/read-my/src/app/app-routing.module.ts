@@ -8,6 +8,7 @@ import { TasksResolverService } from './api/tasks/tasks-resolver.service';
 import { UserResolverService } from './api/users/user-resolver.service';
 import { AdminGuard } from './auth/admin.guard';
 import { AuthGuard } from './auth/auth.guard';
+import { PmGuard } from './auth/pm.guard';
 import { AuthComponent } from './pages/auth/auth.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
 import { EditLogItemComponent } from './pages/logs/edit-log-item/edit-log-item.component';
@@ -34,7 +35,11 @@ const routes: Routes = [
         resolve: [ProjectResolverService],
         component: ProjectsComponent,
       },
-      { path: 'projects/new', component: EditProjectComponent },
+      {
+        path: 'projects/new',
+        component: EditProjectComponent,
+        canActivate: [PmGuard],
+      },
       {
         path: 'projects/:id',
         resolve: [SingleProjectResolverService, TasksResolverService],
@@ -44,6 +49,8 @@ const routes: Routes = [
       {
         path: 'projects/:id/tasks/:taskId/edit',
         resolve: [TasksResolverService],
+        canActivate: [PmGuard],
+
         component: EditTaskComponent,
       },
       {
@@ -69,6 +76,7 @@ const routes: Routes = [
         path: 'projects/:id/edit',
         resolve: [ProjectResolverService, UserResolverService],
         component: EditProjectComponent,
+        canActivate: [PmGuard],
       },
       { path: '**', redirectTo: '/projects' },
     ],
